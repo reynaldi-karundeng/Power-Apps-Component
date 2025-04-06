@@ -1,0 +1,403 @@
+- Accordion:
+    Control: GroupContainer@1.3.0
+    Variant: ManualLayout
+    Properties:
+      DropShadow: =DropShadow.None
+      Height: =220
+      RadiusBottomLeft: =0
+      RadiusBottomRight: =0
+      RadiusTopLeft: =0
+      RadiusTopRight: =0
+      Width: =398
+      X: =352
+      Y: =160
+    Children:
+      - con3:
+          Control: GroupContainer@1.3.0
+          Variant: ManualLayout
+          Properties:
+            DropShadow: =DropShadow.None
+            Height: =If(varButton3Down, 100, 60)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =Parent.Width
+            Y: =con1.Y + con1.Height + con2.Height
+          Children:
+            - recDivider3:
+                Control: Rectangle@2.3.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Fill: =RGBA(219, 219, 219, 1)
+                  Height: =2
+                  Width: =Parent.Width
+                  X: =Parent.Width/2 - Self.Width/2
+                  Y: =Parent.Height - Self.Height
+            - ico3:
+                Control: Image@2.2.3
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Height: =30
+                  Image: |
+                    ="data:image/svg+xml," & EncodeUrl("
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='40px' height='40px'>
+                      <style>
+                        .arrow" & gblArrowTimestamp3 & " {
+                          stroke: black;
+                          stroke-width: 1.5;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          fill: none;
+                          transform-origin: center;
+                          animation-name: rotateArrow;
+                          animation-duration: " & If(IsBlank(gblArrowDown3), "0ms", "400ms") & ";
+                          animation-fill-mode: both;
+                        }
+
+                        @keyframes rotateArrow {
+                          " & If(gblArrowDown3, "0%", "100%") & " {
+                            transform: rotate(0deg);
+                            d: path('m4.5 15.75 7.5-7.5 7.5 7.5'); /* Up arrow */
+                          }
+                          " & If(gblArrowDown3, "100%", "0%") & " {
+                            transform: rotate(180deg);
+                            d: path('m4.5 15.75 7.5-7.5 7.5 7.5'); /* Keep same path, just rotate */
+                          }
+                        }
+                      </style>
+
+                      <path class='arrow" & gblArrowTimestamp3 & "'
+                        d='m4.5 15.75 7.5-7.5 7.5 7.5' />
+                    </svg>
+                    ")
+                  OnSelect: |
+                    =Set(gblArrowDown3, !gblArrowDown);
+                    Set(gblArrowTimestamp3, Text(Now(), "yyyymmddhhmmss"))
+                  Width: =30
+                  X: =Parent.Width - Self.Width - 15
+                  Y: =15
+            - lblBody3:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =36
+                  PaddingLeft: =15
+                  Size: =12
+                  Text: ="Yes. It's animated by default, but you can disable it if you prefer."
+                  Visible: =varButton3Down
+                  Width: =Parent.Width
+                  Y: =Parent.Height - 60
+            - lblHeader3:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Semibold
+                  Height: =31
+                  PaddingLeft: =15
+                  Size: =12
+                  Text: ="Is it animated? "
+                  Width: =Parent.Width
+                  Y: =10
+            - btn3:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  Align: =Align.Left
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  BorderStyle: =BorderStyle.None
+                  Color: =RGBA(0, 0, 0, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  DisabledColor: =RGBA(0, 0, 0, 1)
+                  Fill: =RGBA(0, 0, 0, 0)
+                  Font: =Font.'Open Sans'
+                  Height: =Parent.Height
+                  HoverBorderColor: =ColorFade(Self.Fill, -20%)
+                  HoverColor: =RGBA(0, 0, 0, 1)
+                  HoverFill: =ColorFade(Self.Fill, -20%)
+                  OnSelect: |+
+                    =Set(varButton3Down, true); 
+                    Set(varButton1Up, false); 
+                    Set(varButton2Down, false); 
+                    If(gblArrowDown= true, Set(gblArrowTimestamp, Text(Now(), "yyyymmddhhmmss")));
+                    If(gblArrowDown2 = true, Set(gblArrowTimestamp2, Text(Now(), "yyyymmddhhmmss")));
+                    If(gblArrowDown3 = false, Set(gblArrowTimestamp3, Text(Now(), "yyyymmddhhmmss")));
+                    Set(gblArrowDown, false);
+                    Set(gblArrowDown2, false);
+                    Set(gblArrowDown3, true);
+
+                  PaddingLeft: =20
+                  PaddingRight: =20
+                  PressedBorderColor: =ColorFade(Self.Fill, -40%)
+                  PressedColor: =RGBA(0, 0, 0, 1)
+                  PressedFill: =ColorFade(Self.Fill, -40%)
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Size: =11
+                  Text: |-
+                    ="
+                    "
+                  Width: '=Parent.Width '
+                  X: =Parent.Width/2 - Self.Width/2
+      - con2:
+          Control: GroupContainer@1.3.0
+          Variant: ManualLayout
+          Properties:
+            DropShadow: =DropShadow.None
+            Height: =If(varButton2Down, 100, 60)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =Parent.Width
+            Y: =con1.Y + con1.Height
+          Children:
+            - recDivider2:
+                Control: Rectangle@2.3.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Fill: =RGBA(219, 219, 219, 1)
+                  Height: =2
+                  Width: =Parent.Width
+                  X: =Parent.Width/2 - Self.Width/2
+                  Y: =Parent.Height - Self.Height
+            - ico2:
+                Control: Image@2.2.3
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Height: =30
+                  Image: |
+                    ="data:image/svg+xml," & EncodeUrl("
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='40px' height='40px'>
+                      <style>
+                        .arrow" & gblArrowTimestamp2 & " {
+                          stroke: black;
+                          stroke-width: 1.5;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          fill: none;
+                          transform-origin: center;
+                          animation-name: rotateArrow;
+                          animation-duration: " & If(IsBlank(gblArrowDown2), "0ms", "400ms") & ";
+                          animation-fill-mode: both;
+                        }
+
+                        @keyframes rotateArrow {
+                          " & If(gblArrowDown2, "0%", "100%") & " {
+                            transform: rotate(0deg);
+                            d: path('m4.5 15.75 7.5-7.5 7.5 7.5'); /* Up arrow */
+                          }
+                          " & If(gblArrowDown2, "100%", "0%") & " {
+                            transform: rotate(180deg);
+                            d: path('m4.5 15.75 7.5-7.5 7.5 7.5'); /* Keep same path, just rotate */
+                          }
+                        }
+                      </style>
+
+                      <path class='arrow" & gblArrowTimestamp2 & "'
+                        d='m4.5 15.75 7.5-7.5 7.5 7.5' />
+                    </svg>
+                    ")
+                  OnSelect: |
+                    =Set(gblArrowDown2, !gblArrowDown);
+                    Set(gblArrowTimestamp2, Text(Now(), "yyyymmddhhmmss"))
+                  Width: =30
+                  X: =Parent.Width - Self.Width - 15
+                  Y: =15
+            - lblBody2:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =51
+                  PaddingLeft: =15
+                  Size: =12
+                  Text: ="Yes. It comes with default styles that matches the other components' aesthetic."
+                  Visible: =varButton2Down
+                  Width: =Parent.Width
+                  Y: =Parent.Height - 60
+            - lblHeader2:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Semibold
+                  Height: =31
+                  PaddingLeft: =15
+                  Size: =12
+                  Text: ="Is it styled?"
+                  Width: =Parent.Width
+                  Y: =10
+            - btn2:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  Align: =Align.Left
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  BorderStyle: =BorderStyle.None
+                  Color: =RGBA(0, 0, 0, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  DisabledColor: =RGBA(0, 0, 0, 1)
+                  Fill: =RGBA(0, 0, 0, 0)
+                  Font: =Font.'Open Sans'
+                  Height: =Parent.Height
+                  HoverBorderColor: =ColorFade(Self.Fill, -20%)
+                  HoverColor: =RGBA(0, 0, 0, 1)
+                  HoverFill: =ColorFade(Self.Fill, -20%)
+                  OnSelect: |+
+                    =Set(varButton2Down, true); 
+                    Set(varButton1Up, false);
+                    Set(varButton3Down, false); 
+                    If(gblArrowDown= true, Set(gblArrowTimestamp, Text(Now(), "yyyymmddhhmmss")));
+                    If(gblArrowDown3= true, Set(gblArrowTimestamp3, Text(Now(), "yyyymmddhhmmss")));
+                    If(gblArrowDown2= false, Set(gblArrowTimestamp2, Text(Now(), "yyyymmddhhmmss")));
+                    Set(gblArrowDown, false);
+                    Set(gblArrowDown2, true);
+                    Set(gblArrowDown3, false);
+
+                  PaddingLeft: =20
+                  PaddingRight: =20
+                  PressedBorderColor: =ColorFade(Self.Fill, -40%)
+                  PressedColor: =RGBA(0, 0, 0, 1)
+                  PressedFill: =ColorFade(Self.Fill, -40%)
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Size: =11
+                  Text: |-
+                    ="
+                    "
+                  Width: '=Parent.Width '
+                  X: =Parent.Width/2 - Self.Width/2
+      - con1:
+          Control: GroupContainer@1.3.0
+          Variant: ManualLayout
+          Properties:
+            DropShadow: =DropShadow.None
+            Height: =If(varButton1Up, 100, 60)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =Parent.Width
+          Children:
+            - recDivider1:
+                Control: Rectangle@2.3.0
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Fill: =RGBA(219, 219, 219, 1)
+                  Height: =2
+                  Width: =Parent.Width
+                  X: =Parent.Width/2 - Self.Width/2
+                  Y: =Parent.Height - Self.Height
+            - ico1:
+                Control: Image@2.2.3
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Height: =30
+                  Image: |
+                    ="data:image/svg+xml," & EncodeUrl("
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='40px' height='40px'>
+                      <style>
+                        .arrow" & gblArrowTimestamp & " {
+                          stroke: black;
+                          stroke-width: 1.5;
+                          stroke-linecap: round;
+                          stroke-linejoin: round;
+                          fill: none;
+                          transform-origin: center;
+                          animation-name: rotateArrow;
+                          animation-duration: " & If(IsBlank(gblArrowDown), "0ms", "400ms") & ";
+                          animation-fill-mode: both;
+                        }
+
+                        @keyframes rotateArrow {
+                          " & If(gblArrowDown, "0%", "100%") & " {
+                            transform: rotate(0deg);
+                            d: path('m4.5 15.75 7.5-7.5 7.5 7.5'); /* Up arrow */
+                          }
+                          " & If(gblArrowDown, "100%", "0%") & " {
+                            transform: rotate(180deg);
+                            d: path('m4.5 15.75 7.5-7.5 7.5 7.5'); /* Keep same path, just rotate */
+                          }
+                        }
+                      </style>
+
+                      <path class='arrow" & gblArrowTimestamp & "'
+                        d='m4.5 15.75 7.5-7.5 7.5 7.5' />
+                    </svg>
+                    ")
+                  OnSelect: |
+                    =Set(gblArrowDown1, !gblArrowDown);
+                    Set(gblArrowTimestamp1, Text(Now(), "yyyymmddhhmmss"))
+                  Width: =30
+                  X: =Parent.Width - Self.Width - 15
+                  Y: =15
+            - lblBody1:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =31
+                  PaddingLeft: =15
+                  Size: =12
+                  Text: ="Yes. It adheres to the WAI-ARIA design pattern."
+                  Visible: =varButton1Up
+                  Width: =Parent.Width
+                  Y: =Parent.Height - 60
+            - lblHeader1:
+                Control: Label@2.5.1
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Semibold
+                  Height: =31
+                  PaddingLeft: =15
+                  Size: =12
+                  Text: ="Is it accessible? "
+                  Width: =Parent.Width
+                  Y: =10
+            - btn1:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  Align: =Align.Left
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  BorderStyle: =BorderStyle.None
+                  Color: =RGBA(0, 0, 0, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  DisabledColor: =RGBA(0, 0, 0, 1)
+                  Fill: =RGBA(0, 0, 0, 0)
+                  Font: =Font.'Open Sans'
+                  Height: =Parent.Height
+                  HoverBorderColor: =ColorFade(Self.Fill, -20%)
+                  HoverColor: =RGBA(0, 0, 0, 1)
+                  HoverFill: =ColorFade(Self.Fill, -20%)
+                  OnSelect: |+
+                    =Set(varButton1Up, true); 
+                    Set(varButton2Down, false); 
+                    Set(varButton3Down, false); 
+                    If(gblArrowDown= false, Set(gblArrowTimestamp, Text(Now(), "yyyymmddhhmmss")));
+                    If(gblArrowDown2= true, Set(gblArrowTimestamp2, Text(Now(), "yyyymmddhhmmss")));
+                    If(gblArrowDown3= true, Set(gblArrowTimestamp3, Text(Now(), "yyyymmddhhmmss")));
+                    Set(gblArrowDown, true);
+                    Set(gblArrowDown2, false);
+                    Set(gblArrowDown3, false);
+
+                  PaddingLeft: =20
+                  PaddingRight: =20
+                  PressedBorderColor: =ColorFade(Self.Fill, -40%)
+                  PressedColor: =RGBA(0, 0, 0, 1)
+                  PressedFill: =ColorFade(Self.Fill, -40%)
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Size: =11
+                  Text: |-
+                    ="
+                    "
+                  Width: '=Parent.Width '
+                  X: =Parent.Width/2 - Self.Width/2
